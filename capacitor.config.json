@@ -1,6 +1,6 @@
 {
-  "appId": "com.weatherglobe.app",
-  "appName": "WeatherGlobe",
+  "appId": "com.weatherguru.gold",
+  "appName": "WeatherGuru Gold",
   "webDir": "dist",
   "bundledWebRuntime": false,
   "server": {

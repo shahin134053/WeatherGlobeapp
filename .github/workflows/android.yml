@@ -1,4 +1,4 @@
-name: Build & Release (Android APK, Play Store AAB & iOS)
+name: Build & Release (WeatherGuru Gold)
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build-and-release:
-    name: Build Android APK, Google Play AAB & iOS Package
+    name: Build WeatherGuru Gold (APK, AAB & iOS)
     runs-on: ubuntu-latest
     env:
       ANDROID_HOME: /usr/local/lib/android/sdk
@@ -72,14 +72,14 @@ jobs:
       - name: Prepare Release Packages
         run: |
           mkdir -p release-assets
-          cp android/app/build/outputs/apk/debug/app-debug.apk release-assets/WeatherGlobe-Android.apk
-          cp android/app/build/outputs/bundle/release/app-release.aab release-assets/WeatherGlobe-GooglePlay.aab
-          zip -r release-assets/WeatherGlobe-iOS-Project.zip ios dist capacitor.config.json
+          cp android/app/build/outputs/apk/debug/app-debug.apk release-assets/WeatherGuru-Gold-Android.apk
+          cp android/app/build/outputs/bundle/release/app-release.aab release-assets/WeatherGuru-Gold-PlayStore.aab
+          zip -r release-assets/WeatherGuru-Gold-iOS.zip ios dist capacitor.config.json
 
       - name: Upload Artifacts to GitHub Actions
         uses: actions/upload-artifact@v4
         with:
-          name: WeatherGlobe-App-Packages
+          name: WeatherGuru-Gold-Packages
           path: release-assets/*
           retention-days: 30
 
@@ -87,25 +87,33 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         with:
-          tag_name: v1.0.0
-          name: "WeatherGlobe Latest Release — (APK, AAB & iOS)"
+          tag_name: WeatherGuru-Gold
+          name: "WeatherGuru Gold (ওয়েদার গুরু গোল্ড)"
           draft: false
           prerelease: false
           body: |
-            # 🌍 WeatherGlobe Official Latest Release
+            # 🌟 WeatherGuru Gold (ওয়েদার গুরু গোল্ড) — Official Release
 
-            Welcome to the latest version of **WeatherGlobe**!
+            ওয়েদার গুরু গোল্ড (WeatherGuru Gold) মোবাইল ও ওয়েব অ্যাপের অফিশিয়াল রিলিজ।
 
-            ### 📲 Direct Downloads:
-            - **`WeatherGlobe-Android.apk`** — Direct install for Android devices (Phones, Tablets, TVs).
-            - **`WeatherGlobe-GooglePlay.aab`** — Official Android App Bundle for Google Play Console.
-            - **`WeatherGlobe-iOS-Project.zip`** — Capacitor iOS project for Xcode / Apple App Store.
+            ### 📲 সরাসরি ডাউনলোড লিংক (Direct Downloads):
+            1. **`WeatherGuru-Gold-Android.apk`**
+               - সরাসরি যেকোনো অ্যান্ড্রয়েড ডিভাইসে ইনস্টল করার জন্য প্রস্তুত APK ফাইল।
+               - Uptodown, APKPure বা যেকোনো স্টোরে পাবলিশের উপযোগী।
+
+            2. **`WeatherGuru-Gold-PlayStore.aab`**
+               - Google Play Store-এর অফিসিয়াল Android App Bundle (AAB)।
+               - সম্পূর্ণ 64-বিট ও লেটেস্ট Target SDK সমর্থিত।
+
+            3. **`WeatherGuru-Gold-iOS.zip`**
+               - Apple iPhone-এর জন্য সম্পূর্ণ Capacitor iOS প্রজেক্ট ফাইল।
+               - Xcode ও TestFlight-এর জন্য প্রস্তুত।
 
             ---
-            *Built automatically with GitHub Actions CI/CD.*
+            *Built automatically via GitHub Actions CI/CD.*
           files: |
-            release-assets/WeatherGlobe-Android.apk
-            release-assets/WeatherGlobe-GooglePlay.aab
-            release-assets/WeatherGlobe-iOS-Project.zip
+            release-assets/WeatherGuru-Gold-Android.apk
+            release-assets/WeatherGuru-Gold-PlayStore.aab
+            release-assets/WeatherGuru-Gold-iOS.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
