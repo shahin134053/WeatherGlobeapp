@@ -12,6 +12,8 @@ jobs:
   build-and-release:
     name: Build Android APK, Google Play AAB & iOS Package
     runs-on: ubuntu-latest
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
 
     steps:
       - name: Checkout Code
@@ -27,9 +29,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
 
       - name: Install Project Dependencies
         run: |
@@ -89,31 +88,21 @@ jobs:
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         with:
           tag_name: v1.0.0
-          name: "WeatherGlobe v1.0.0 — Official App Release (APK, AAB & iOS)"
+          name: "WeatherGlobe Latest Release — (APK, AAB & iOS)"
           draft: false
           prerelease: false
           body: |
-            # 🌍 WeatherGlobe Official Release v1.0.0
+            # 🌍 WeatherGlobe Official Latest Release
 
-            Complete multi-platform builds for WeatherGlobe:
+            Welcome to the latest version of **WeatherGlobe**!
 
-            ### 📦 Download Files:
-            1. **`WeatherGlobe-Android.apk`**
-               - Direct installable APK for Android phones and tablets.
-               - Compatible with Android 7.0 to Android 15+.
-               - Ready for testing and publishing to Uptodown, APKPure, etc.
-
-            2. **`WeatherGlobe-GooglePlay.aab`**
-               - Official Google Play Store production bundle (Android App Bundle).
-               - Meets Google Play Target SDK and 64-bit architecture requirements.
-
-            3. **`WeatherGlobe-iOS-Project.zip`**
-               - Native iOS project with Capacitor.
-               - Ready to open in Xcode for App Store submission or TestFlight.
-               - Instant iOS installation also available via Safari **"Add to Home Screen"**.
+            ### 📲 Direct Downloads:
+            - **`WeatherGlobe-Android.apk`** — Direct install for Android devices (Phones, Tablets, TVs).
+            - **`WeatherGlobe-GooglePlay.aab`** — Official Android App Bundle for Google Play Console.
+            - **`WeatherGlobe-iOS-Project.zip`** — Capacitor iOS project for Xcode / Apple App Store.
 
             ---
-            *Built automatically via GitHub Actions CI/CD.*
+            *Built automatically with GitHub Actions CI/CD.*
           files: |
             release-assets/WeatherGlobe-Android.apk
             release-assets/WeatherGlobe-GooglePlay.aab
